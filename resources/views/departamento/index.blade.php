@@ -6,9 +6,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	Departamentos
+                	<i class="fa fa-cubes"></i> Departamentos
                 	<div class="pull-right">
-						<a href="{{route('departamento.create')}}" class="btn btn-primary btn-xs pull-right"> + Nuevo</a>
+						<a href="{{route('departamento.create')}}" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-plus-circle"></i> Nuevo</a>
                 	</div>
                 </div>
 
@@ -31,13 +31,13 @@
 									<td>{{$departamento->name}}</td>
 									<td>{{$departamento->abreviatura}}</td>
 									<td>
-										<a href="{{route('departamento.edit',$departamento->id)}}" class="btn btn-warning">Editar</a>
+										<a href="{{route('departamento.edit',$departamento->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
 									</td>
 									<td>
 										<form class="" action="{{route('departamento.destroy',$departamento->id)}}" method="post">
 											<input type="hidden" name="_method" value="delete">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<input type="submit" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar este registro?');" name="name" value="Eliminar">
+											<button type="submit" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar este registro?');"><i class="fa fa-trash"></i></button>
 										</form>
 									</td>
 								</tr>

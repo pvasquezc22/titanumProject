@@ -20,9 +20,9 @@
 		        <div class="col-md-8 col-md-offset-2">
 		            <div class="panel panel-default">
 		                <div class="panel-heading">
-		                	Usuarios
+		                	<i class="fa fa-users"></i> Usuarios
 		                	<div class="pull-right">
-								<a href="{{route('usuarios.create')}}" class="btn btn-primary btn-xs pull-right"> + Nuevo</a>
+								<a href="{{route('usuarios.create')}}" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-plus-circle"></i> Nuevo</a>
 		                	</div>
 		                </div>
 
@@ -49,13 +49,13 @@
 											<td>{{$user->departamento_abreviatura}}</td>
 											<td>{{$user->email}}</td>
 											<td>
-												<a href="{{route('usuarios.edit',$user->id)}}" class="btn btn-warning">Editar</a>
+												<a href="{{route('usuarios.edit',$user->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
 											</td>
 											<td>
 												<form class="" action="{{route('usuarios.destroy',$user->id)}}" method="post">
 													<input type="hidden" name="_method" value="delete">
 													<input type="hidden" name="_token" value="{{ csrf_token() }}">
-													<input type="submit" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar este registro?');" name="name" value="Eliminar">
+													<button type="submit" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar este registro?');"><i class="fa fa-trash"></i></button>
 												</form>
 											</td>
 										</tr>
