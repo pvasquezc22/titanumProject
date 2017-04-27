@@ -91,7 +91,6 @@
                 </div>
             </div>
         </nav>
-
         @yield('content')
     </div>
 

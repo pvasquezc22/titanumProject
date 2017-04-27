@@ -18,6 +18,7 @@
 							<tr>
 								<th>No.</th>
 								<th>Nombre</th>
+								<th>Abreviatura</th>
 								<th>Editar</th>
 								<th>Eliminar</th>
 							</tr>
@@ -28,6 +29,7 @@
 								<tr>
 									<td>{{$num++}}</td>
 									<td>{{$departamento->name}}</td>
+									<td>{{$departamento->abreviatura}}</td>
 									<td>
 										<a href="{{route('departamento.edit',$departamento->id)}}" class="btn btn-warning">Editar</a>
 									</td>

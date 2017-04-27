@@ -42,10 +42,11 @@ class ControladorDepartamento extends Controller
     public function store(Request $request)
     {
         //validation of data
-        $this->validate($request,['departamento_name'=>'required']);
+        $this->validate($request,['departamento_name'=>'required','abreviatura'=>'required']);
         //create new data
         $departamento = new departamento;
         $departamento->name = $request->departamento_name;
+        $departamento->abreviatura = $request->abreviatura;        
         $departamento->save();
         return redirect()->route('departamento.index')->with('alert-success','Departamento creado');
     }
@@ -84,11 +85,11 @@ class ControladorDepartamento extends Controller
     public function update(Request $request, $id)
     {
         //validation of data
-        $this->validate($request,[
-            'departamento_name'=>'required']);
+        $this->validate($request,['departamento_name'=>'required','abreviatura'=>'required']);
         //edit updated data
         $departamento = Departamento::findOrFail($id);
         $departamento->name = $request->departamento_name;
+        $departamento->abreviatura = $request->abreviatura;
         $departamento->save();
         return redirect()->route('departamento.index')->with('alert-warning','Departamento editado');
     }
