@@ -91,6 +91,7 @@ class ControlerEnfermedad extends Controller
      */
     public function update(Request $request, $id)
     {
+        //aqui
         //validation of data
         $this->validate($request,['nombre'=>'required','descripcion'=>'required']);
         //edit updated data
