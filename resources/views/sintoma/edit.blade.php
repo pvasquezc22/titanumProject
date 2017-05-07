@@ -6,27 +6,27 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	<i class="fa fa-edit"></i> Editar Departamento
+                	<i class="fa fa-edit"></i> Editar Sintoma
                 </div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{route('departamento.update',$departamento->id)}}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{route('sintoma.update',$sintoma->id)}}">
                         <input name="_method" type="hidden" value="PATCH">
 						{{ csrf_field() }}
 
-						<div class="form-group{{ ($errors->has('departamento_name')) ? $errors->first('departamento_name') : '' }}">
-                            <label for="departamento_name" class="col-md-4 control-label">Nombre</label>
+						<div class="form-group{{ ($errors->has('nombre')) ? $errors->first('nombre') : '' }}">
+                            <label for="nombre" class="col-md-4 control-label">Nombre</label>
                             <div class="col-md-6">
-    							<input type="text" id="departamento_name" name="departamento_name" class="form-control" placeholder="Ingresa el nombre aqui" value="{{$departamento->name}}" autofocus>
-    							{!! $errors->first('departamento_name','<p class="help-block">:message</p>') !!}
+    							<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingresa el nombre aqui" value="{{$sintoma->nombre}}" autofocus>
+    							{!! $errors->first('nombre','<p class="help-block">:message</p>') !!}
                             </div>
 						</div>
 
-                        <div class="form-group{{ ($errors->has('abreviatura')) ? $errors->first('abreviatura') : '' }}">
-                            <label for="departamento_name" class="col-md-4 control-label">Abreviatura</label>
+                        <div class="form-group{{ ($errors->has('descripcion')) ? $errors->first('descripcion') : '' }}">
+                            <label for="descripcion" class="col-md-4 control-label">Descripcion</label>
                             <div class="col-md-6">
-                                <input type="text" id="abreviatura" name="abreviatura" class="form-control" placeholder="Ingresa la breviatura aqui" value="{{$departamento->abreviatura}}">
-                                {!! $errors->first('abreviatura','<p class="help-block">:message</p>') !!}
+                                <textarea type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Ingresa la descripcion aqui">{{$sintoma->descripcion}}</textarea>
+                                {!! $errors->first('descripcion','<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
 

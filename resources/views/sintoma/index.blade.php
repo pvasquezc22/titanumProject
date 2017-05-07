@@ -6,9 +6,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	<i class="fa fa-cubes"></i> Departamentos
+                	<i class="fa fa-eye"></i> Sintomas
                 	<div class="pull-right">
-						<a href="{{route('departamento.create')}}" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-plus-circle"></i> Nuevo</a>
+						<a href="{{route('sintoma.create')}}" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-plus-circle"></i> Nuevo</a>
                 	</div>
                 </div>
 
@@ -18,23 +18,23 @@
 							<tr>
 								<th>No.</th>
 								<th>Nombre</th>
-								<th>Abreviatura</th>
+								<th>Descripcion</th>
 								<th>Editar</th>
 								<th>Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php $num = 1; ?>
-							@foreach($departamentos as $departamento)
+							@foreach($sintomas as $sintoma)
 								<tr>
 									<td>{{$num++}}</td>
-									<td>{{$departamento->name}}</td>
-									<td>{{$departamento->abreviatura}}</td>
+									<td>{{$sintoma->nombre}}</td>
+									<td>{{$sintoma->descripcion}}</td>
 									<td>
-										<a href="{{route('departamento.edit',$departamento->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+										<a href="{{route('sintoma.edit',$sintoma->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
 									</td>
 									<td>
-										<form class="" action="{{route('departamento.destroy',$departamento->id)}}" method="post">
+										<form class="" action="{{route('sintoma.destroy',$sintoma->id)}}" method="post">
 											<input type="hidden" name="_method" value="delete">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<button type="submit" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar este registro?');"><i class="fa fa-trash"></i></button>

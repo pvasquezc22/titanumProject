@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Departamento;
+use App\Sintoma;
 
-class ControladorDepartamento extends Controller
+class ControlerSintoma extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
@@ -20,8 +20,8 @@ class ControladorDepartamento extends Controller
      */
     public function index()
     {
-        $departamentos = Departamento::all();
-        return view('departamento.index',['departamentos' => $departamentos]);
+        $sintomas = Sintoma::all();
+        return view('sintoma.index',['sintomas' => $sintomas]);
     }
 
 
@@ -33,7 +33,7 @@ class ControladorDepartamento extends Controller
     public function create()
     {
         //create new data
-        return view('departamento.create');
+        return view('sintoma.create');
     }
 
     /**
@@ -45,13 +45,13 @@ class ControladorDepartamento extends Controller
     public function store(Request $request)
     {
         //validation of data
-        $this->validate($request,['departamento_name'=>'required','abreviatura'=>'required']);
+        $this->validate($request,['nombre'=>'required','descripcion'=>'required']);
         //create new data
-        $departamento = new departamento;
-        $departamento->name = $request->departamento_name;
-        $departamento->abreviatura = $request->abreviatura;        
-        $departamento->save();
-        return redirect()->route('departamento.index')->with('alert-success','Departamento creado');
+        $sintoma = new Sintoma;
+        $sintoma->nombre = $request->nombre;
+        $sintoma->descripcion = $request->descripcion;        
+        $sintoma->save();
+        return redirect()->route('sintoma.index')->with('alert-success','Sintoma creado');
     }
 
     /**
@@ -73,9 +73,9 @@ class ControladorDepartamento extends Controller
      */
     public function edit($id)
     {
-        $departamento = Departamento::findOrFail($id);
+        $sintoma = Sintoma::findOrFail($id);
         //return to view edit
-        return view('departamento.edit',compact('departamento'));
+        return view('sintoma.edit',compact('sintoma'));
     }
 
     /**
@@ -88,13 +88,13 @@ class ControladorDepartamento extends Controller
     public function update(Request $request, $id)
     {
         //validation of data
-        $this->validate($request,['departamento_name'=>'required','abreviatura'=>'required']);
+        $this->validate($request,['nombre'=>'required','descripcion'=>'required']);
         //edit updated data
-        $departamento = Departamento::findOrFail($id);
-        $departamento->name = $request->departamento_name;
-        $departamento->abreviatura = $request->abreviatura;
-        $departamento->save();
-        return redirect()->route('departamento.index')->with('alert-warning','Departamento editado');
+        $sintoma = Sintoma::findOrFail($id);
+        $sintoma->nombre = $request->nombre;
+        $sintoma->descripcion = $request->descripcion;
+        $sintoma->save();
+        return redirect()->route('sintoma.index')->with('alert-warning','Sintoma editado');
     }
 
     /**
@@ -105,8 +105,8 @@ class ControladorDepartamento extends Controller
      */
     public function destroy($id)
     {
-        $departamento = Departamento::findOrFail($id);
-        $departamento->delete();
-        return redirect()->route('departamento.index')->with('alert-warning','Departamento eliminado');
+        $sintoma = Sintoma::findOrFail($id);
+        $sintoma->delete();
+        return redirect()->route('sintoma.index')->with('alert-warning','Sintoma eliminado');
     }
 }

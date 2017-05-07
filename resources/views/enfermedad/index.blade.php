@@ -6,9 +6,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	<i class="fa fa-cubes"></i> Departamentos
+                	<i class="fa fa-crosshairs"></i> Enfermedades
                 	<div class="pull-right">
-						<a href="{{route('departamento.create')}}" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-plus-circle"></i> Nuevo</a>
+						<a href="{{route('enfermedad.create')}}" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-plus-circle"></i> Nuevo</a>
                 	</div>
                 </div>
 
@@ -18,23 +18,30 @@
 							<tr>
 								<th>No.</th>
 								<th>Nombre</th>
-								<th>Abreviatura</th>
+								<th>Descripcion</th>
 								<th>Editar</th>
 								<th>Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php $num = 1; ?>
-							@foreach($departamentos as $departamento)
+							@foreach($enfermedades as $enfermedad)
 								<tr>
 									<td>{{$num++}}</td>
-									<td>{{$departamento->name}}</td>
-									<td>{{$departamento->abreviatura}}</td>
+									<td>{{$enfermedad->nombre}}</td>
 									<td>
-										<a href="{{route('departamento.edit',$departamento->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+										<p>{{$enfermedad->descripcion}}</p>
+										<div class="sintomas">
+											@foreach($enfermedad->sintomas as $sintoma)
+												<span class="label label-default">{{$sintoma->nombre}}</span>
+											@endforeach
+										</div>
 									</td>
 									<td>
-										<form class="" action="{{route('departamento.destroy',$departamento->id)}}" method="post">
+										<a href="{{route('enfermedad.edit',$enfermedad->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+									</td>
+									<td>
+										<form class="" action="{{route('enfermedad.destroy',$enfermedad->id)}}" method="post">
 											<input type="hidden" name="_method" value="delete">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<button type="submit" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar este registro?');"><i class="fa fa-trash"></i></button>

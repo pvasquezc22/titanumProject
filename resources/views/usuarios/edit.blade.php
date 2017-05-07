@@ -5,40 +5,89 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                	Editar Usuario
-                </div>
-
+                <div class="panel-heading"><i class="fa fa-edit"></i> Editar Usuario</div>
                 <div class="panel-body">
-                    <form class="" action="{{route('usuarios.update',$user->id)}}" method="post">
+
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('usuarios.update',$user->id) }}">
                         <input name="_method" type="hidden" value="PATCH">
-						{{ csrf_field() }}
-						<div class="form-group{{ ($errors->has('name')) ? $errors->first('name') : '' }}">
-                            <label for="name">Nombre :</label>
-							<input type="text" id="name" name="name" class="form-control" placeholder="Ingresa el nombre aqui" value="{{$user->name}}" autofocus="true">
-							{!! $errors->first('name','<p class="help-block">:message</p>') !!}
-						</div>
-                        <div class="form-group{{ ($errors->has('email')) ? $errors->first('email') : '' }}">
-                            <label for="email">Email :</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="Ingresa el email aqui" value="{{$user->email}}">
-                            {!! $errors->first('email','<p class="help-block">:message</p>') !!}
+                        {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">Nombre completo</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control" name="name" placeholder="Ingresa el nombre aqui" value="{{$user->name}}" required autofocus>
+
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                        <div class="form-group{{ ($errors->has('id_departamento')) ? $errors->first('id_departamento') : '' }}">
-                            <label for="email">Departamento :</label>
-                            <select id="id_departamento" name="id_departamento" class="form-control">
-                                <option value="0" >Selecciona un departamento</option>
-                                @foreach($departamentos as $departamento)
-                                <option value="{{$departamento->id}}" @if ($user->id_departamento == $departamento->id) selected @endif >
-                                {{$departamento->name}}
-                                </option>
-                                @endforeach
-                            </select>
-                            {!! $errors->first('id_departamento','<p class="help-block">:message</p>') !!}
+
+                        <div class="form-group{{ $errors->has('carnet') ? ' has-error' : '' }}">
+                            <label for="carnet" class="col-md-4 control-label">Carnet de identidad</label>
+
+                            <div class="col-md-6">
+                                <input id="carnet" type="text" class="form-control" name="carnet" placeholder="Ingresa el carnet de identidad aqui" value="{{$user->carnet}}" required>
+
+                                @if ($errors->has('carnet'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('carnet') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-						<div class="form-group">
-							<input type="submit" class="btn btn-warning" value="Editar">
-						</div>
-					</form>
+
+                        <div class="form-group{{ $errors->has('departamento_id') ? ' has-error' : '' }}">
+                            <label for="departamento_id" class="col-md-4 control-label">Departamento</label>
+                            <div class="col-md-6">
+                                <select id="departamento_id" name="departamento_id" class="form-control">
+                                    <option value="0" >Selecciona un departamento</option>
+                                    @foreach($departamentos as $departamento)
+                                    <option value="{{$departamento->id}}" {{ ($user->departamento_id == $departamento->id) ? 'selected':'' }} >
+                                    {{$departamento->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('departamento_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('departamento_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Correo electronico</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control" name="email" placeholder="Ingresa el email aqui" value="{{$user->email}}" required>
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="col-md-6" align="left">
+                                    <button type="submit" class="btn btn-block btn-warning">
+                                        Editar
+                                    </button>
+                                </div>
+                                <div class="col-md-6" align="right">
+                                    <a class="btn btn-default btn-block" href="{{url()->previous()}}">
+                                        Cancelar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

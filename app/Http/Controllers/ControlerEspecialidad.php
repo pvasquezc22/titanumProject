@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Departamento;
+use App\Especialidad;
 
-class ControladorDepartamento extends Controller
+class ControlerEspecialidad extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
@@ -20,8 +20,8 @@ class ControladorDepartamento extends Controller
      */
     public function index()
     {
-        $departamentos = Departamento::all();
-        return view('departamento.index',['departamentos' => $departamentos]);
+        $especialidades = Especialidad::all();
+        return view('especialidad.index',['especialidades' => $especialidades]);
     }
 
 
@@ -33,7 +33,7 @@ class ControladorDepartamento extends Controller
     public function create()
     {
         //create new data
-        return view('departamento.create');
+        return view('especialidad.create');
     }
 
     /**
@@ -45,13 +45,13 @@ class ControladorDepartamento extends Controller
     public function store(Request $request)
     {
         //validation of data
-        $this->validate($request,['departamento_name'=>'required','abreviatura'=>'required']);
+        $this->validate($request,['nombre'=>'required','descripcion'=>'required']);
         //create new data
-        $departamento = new departamento;
-        $departamento->name = $request->departamento_name;
-        $departamento->abreviatura = $request->abreviatura;        
-        $departamento->save();
-        return redirect()->route('departamento.index')->with('alert-success','Departamento creado');
+        $especialidad = new Especialidad;
+        $especialidad->nombre = $request->nombre;
+        $especialidad->descripcion = $request->descripcion;        
+        $especialidad->save();
+        return redirect()->route('especialidad.index')->with('alert-success','Especialidad creada');
     }
 
     /**
@@ -73,9 +73,9 @@ class ControladorDepartamento extends Controller
      */
     public function edit($id)
     {
-        $departamento = Departamento::findOrFail($id);
+        $especialidad = Especialidad::findOrFail($id);
         //return to view edit
-        return view('departamento.edit',compact('departamento'));
+        return view('especialidad.edit',compact('especialidad'));
     }
 
     /**
@@ -88,13 +88,13 @@ class ControladorDepartamento extends Controller
     public function update(Request $request, $id)
     {
         //validation of data
-        $this->validate($request,['departamento_name'=>'required','abreviatura'=>'required']);
+        $this->validate($request,['nombre'=>'required','descripcion'=>'required']);
         //edit updated data
-        $departamento = Departamento::findOrFail($id);
-        $departamento->name = $request->departamento_name;
-        $departamento->abreviatura = $request->abreviatura;
-        $departamento->save();
-        return redirect()->route('departamento.index')->with('alert-warning','Departamento editado');
+        $especialidad = Especialidad::findOrFail($id);
+        $especialidad->nombre = $request->nombre;
+        $especialidad->descripcion = $request->descripcion;
+        $especialidad->save();
+        return redirect()->route('especialidad.index')->with('alert-warning','Especialidad editada');
     }
 
     /**
@@ -105,8 +105,8 @@ class ControladorDepartamento extends Controller
      */
     public function destroy($id)
     {
-        $departamento = Departamento::findOrFail($id);
-        $departamento->delete();
-        return redirect()->route('departamento.index')->with('alert-warning','Departamento eliminado');
+        $especialidad = Especialidad::findOrFail($id);
+        $especialidad->delete();
+        return redirect()->route('especialidad.index')->with('alert-warning','Especialidad eliminada');
     }
 }

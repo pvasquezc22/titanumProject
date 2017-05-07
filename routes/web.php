@@ -22,4 +22,7 @@ Route::get('/home', 'HomeController@index');
 Route::group(['middleware' => ['web']], function () {
     Route::resource('departamento','ControladorDepartamento');
     Route::resource('usuarios','ControlerUser');
+    Route::resource('especialidad','ControlerEspecialidad');
+    Route::resource('sintoma','ControlerSintoma');
+    Route::resource('enfermedad','ControlerEnfermedad');
 });

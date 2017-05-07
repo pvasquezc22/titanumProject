@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <!--link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" type="text/css"-->
+    {{ Html::style('css/font-awesome.css') }}
 
     <!-- Scripts -->
     <script>
@@ -49,27 +51,45 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+                            <li><a href="."><i class="fa fa-home"></i> Inicio</a></li>
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Ingresar</a></li>
-                            <li><a href="{{ route('register') }}">Registrarse</a></li>
+                            <li><a href="{{ route('login') }}"><i class="fa fa-vcard-o"></i> Ingresar</a></li>
+                            <li><a href="{{ route('register') }}"><i class="fa fa-plus-circle"></i> Registrarse</a></li>
                         @else
-                            <li>
-                                <a href="{{route('usuarios.index')}}">Usuarios</a>
-                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Parametricas <span class="caret"></span>
+                                    <i class="fa fa-sitemap"></i> Sistema <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{route('departamento.index')}}">Departamentos</a>
+                                        <a href="{{route('usuarios.index')}}"><i class="fa fa-users"></i> Usuarios</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('departamento.index')}}"><i class="fa fa-cubes"></i> Departamentos</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('especialidad.index')}}"><i class="fa fa-star"></i> Especialidades</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <i class="fa fa-folder"></i> Parametros <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{route('sintoma.index')}}"><i class="fa fa-eye"></i> Sintomas</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('enfermedad.index')}}"><i class="fa fa-crosshairs"></i> Enfermedades</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <i class="fa fa-user-circle-o"></i> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
@@ -77,7 +97,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Salir
+                                            <i class="fa fa-sign-out"></i> Salir
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -91,7 +111,6 @@
                 </div>
             </div>
         </nav>
-
         @yield('content')
     </div>
 
