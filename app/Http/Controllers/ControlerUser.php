@@ -11,6 +11,9 @@ use DB;
 
 class ControlerUser extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,14 +21,11 @@ class ControlerUser extends Controller
      */
     public function index()
     {
-        $users = DB::table("users")
+        /*$users = DB::table("users")
                 ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id', 'left outer')
                 ->select('users.*', 'departamentos.abreviatura as departamento_abreviatura')
-                ->get();
-        /*$users = DB::table('users')
-                ->join('departmentos', 'users.departmento_id', '=', 'departmentos.id')
-                ->select('users.*', 'departmentos.name as dept_name')
-                ->paginate(2);*/
+                ->get();*/
+        $users = User::all();
         return view('usuarios.index',['users' => $users]);
     }
 
@@ -88,6 +88,10 @@ class ControlerUser extends Controller
     {
     	$user = User::findOrFail($id);
         $departamentos = Departamento::all();
+        /*$deptos = array();
+        foreach ($departamentos as $departamento) {
+            $deptos[$departamento->id] = $departamento->name;
+        }*/
         return view('usuarios.edit',['user' => $user , 'departamentos' => $departamentos]);
     }
 

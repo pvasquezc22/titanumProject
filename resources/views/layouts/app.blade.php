@@ -12,7 +12,8 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" type="text/css">
+    <!--link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" type="text/css"-->
+    {{ Html::style('css/font-awesome.css') }}
 
     <!-- Scripts -->
     <script>
@@ -66,6 +67,23 @@
                                     </li>
                                     <li>
                                         <a href="{{route('departamento.index')}}"><i class="fa fa-cubes"></i> Departamentos</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('especialidad.index')}}"><i class="fa fa-star"></i> Especialidades</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <i class="fa fa-folder"></i> Parametros <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{route('sintoma.index')}}"><i class="fa fa-eye"></i> Sintomas</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('enfermedad.index')}}"><i class="fa fa-crosshairs"></i> Enfermedades</a>
                                     </li>
                                 </ul>
                             </li>
