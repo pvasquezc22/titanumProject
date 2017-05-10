@@ -12,4 +12,10 @@ class Sintoma extends Model
     {
     	return $this->belongsToMany('App\Enfermedad', 'enfermedad_sintomas', 'id', 'id');
     }
+
+    public function diagnosticos()
+    {
+    	return $this->belongsToMany('App\Diagnostico', 'diagnostico_sintoma', 'id', 'id');
+    }
+
 }

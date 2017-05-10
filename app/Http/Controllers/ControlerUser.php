@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use App\Departamento;
+use App\Turno;
+use App\Especialidad;
 use DB;
 //use App\Quotation;
 
@@ -21,10 +23,6 @@ class ControlerUser extends Controller
      */
     public function index()
     {
-        /*$users = DB::table("users")
-                ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id', 'left outer')
-                ->select('users.*', 'departamentos.abreviatura as departamento_abreviatura')
-                ->get();*/
         $users = User::all();
         return view('usuarios.index',['users' => $users]);
     }
@@ -37,9 +35,11 @@ class ControlerUser extends Controller
      */
     public function create()
     {
-        //create new data
+        $especialidades = Especialidad::all();
         $departamentos = Departamento::all();
-        return view('usuarios.create',['departamentos' => $departamentos]);
+        $turnos = Turno::all();
+        $especialidades = Especialidad::all();
+        return view('usuarios.create',['departamentos' => $departamentos , 'turnos' => $turnos , 'especialidades' => $especialidades]);
     }
 
     /**
@@ -50,10 +50,12 @@ class ControlerUser extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $this->validate($request,[
             'name' => 'required|max:255',
             'carnet' => 'required|max:255|unique:users',
             'departamento_id' => 'required',
+            'tipo_usuario' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed']);
 
@@ -61,8 +63,20 @@ class ControlerUser extends Controller
         $user->name = $request->name;
         $user->carnet = $request->carnet;
         $user->departamento_id = $request->departamento_id;
+        $user->tipo_usuario = $request->tipo_usuario;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
+        if ($request->tipo_usuario == 'Administrador') {
+            $user->especialidad_id = null;
+            $user->turno_id = null;
+        }else{
+            if(isset($request->especialidad_id)){
+                $user->especialidad_id = $request->especialidad_id;
+            }
+            if(isset($request->turno_id)){
+                $user->turno_id = $request->turno_id;
+            }            
+        }
         $user->save();
         return redirect()->route('usuarios.index')->with('alert-success','Usuario creado');
     }
@@ -88,11 +102,9 @@ class ControlerUser extends Controller
     {
     	$user = User::findOrFail($id);
         $departamentos = Departamento::all();
-        /*$deptos = array();
-        foreach ($departamentos as $departamento) {
-            $deptos[$departamento->id] = $departamento->name;
-        }*/
-        return view('usuarios.edit',['user' => $user , 'departamentos' => $departamentos]);
+        $turnos = Turno::all();
+        $especialidades = Especialidad::all();
+        return view('usuarios.edit',['user' => $user , 'departamentos' => $departamentos , 'turnos' => $turnos , 'especialidades' => $especialidades]);
     }
 
     /**
@@ -104,16 +116,31 @@ class ControlerUser extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->validate($request,[
             'name' => 'required|max:255',
             'carnet' => 'required|max:255|unique:users,carnet,'.$id,
             'departamento_id' => 'required',
+            'tipo_usuario' => 'required',
             'email' => 'required|email|max:255|unique:users,email,'.$id]);
+
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->carnet = $request->carnet;
         $user->departamento_id = $request->departamento_id;
+        $user->tipo_usuario = $request->tipo_usuario;
         $user->email = $request->email;
+        if ($request->tipo_usuario == 'Administrador') {
+            $user->especialidad_id = null;
+            $user->turno_id = null;
+        }else{
+            if(isset($request->especialidad_id)){
+                $user->especialidad_id = $request->especialidad_id;
+            }
+            if(isset($request->turno_id)){
+                $user->turno_id = $request->turno_id;
+            }            
+        }
         $user->save();
         return redirect()->route('usuarios.index')->with('alert-warning','Usuario editado');
     }

@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
                 	<i class="fa fa-edit"></i> Editar Enfermedad
@@ -29,6 +29,24 @@
                             <div class="col-md-6">
                                 <textarea type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Ingresa la descripcion aqui">{{$enfermedad->descripcion}}</textarea>
                                 {!! $errors->first('descripcion','<p class="help-block">:message</p>') !!}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group{{ $errors->has('especialidad_id') ? ' has-error' : '' }}">
+                            <label for="especialidad_id" class="col-md-4 control-label">Especialidad</label>
+                            <div class="col-md-6">
+                                <select id="especialidad_id" name="especialidad_id" class="form-control">
+                                    @foreach($especialidades as $especialidad)
+                                    <option value="{{$especialidad->id}}" {{ ($enfermedad->especialidad_id == $especialidad->id) ? 'selected':'' }} >
+                                    {{$especialidad->nombre}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('especialidad_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('especialidad_id') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -73,7 +91,3 @@
     {!! Html::script('js/jquery.min.js') !!}
 
     {!! Html::script('js/bootstrap-select.min.js') !!}
-
-<script type="text/javascript">
-    $('#sintomas').selectpicker('val', ['Mustard','Relish']);
-</script>

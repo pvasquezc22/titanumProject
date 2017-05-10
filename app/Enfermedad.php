@@ -12,4 +12,16 @@ class Enfermedad extends Model
     {
     	return $this->belongsToMany('App\Sintoma');
     }
+
+    public function especialidad()
+    {
+        return $this->belongsTo('App\Especialidad');
+    }
+
+    public function diagnosticos()
+    {
+    	return $this->belongsToMany('App\Diagnostico', 'diagnostico_enfermedad', 'id', 'id');
+    }
+
+
 }

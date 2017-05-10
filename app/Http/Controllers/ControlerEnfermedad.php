@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
 use App\Enfermedad;
-
 use App\Sintoma;
+use App\Especialidad;
 
 class ControlerEnfermedad extends Controller
 {
@@ -36,7 +35,8 @@ class ControlerEnfermedad extends Controller
     {
         //create new data
         $sintomas = Sintoma::all();
-        return view('enfermedad.create',['sintomas' => $sintomas]);
+        $especialidades = Especialidad::all();
+        return view('enfermedad.create',['sintomas' => $sintomas , 'especialidades' => $especialidades]);
     }
 
     /**
@@ -53,8 +53,11 @@ class ControlerEnfermedad extends Controller
         $enfermedad = new Enfermedad;
         $enfermedad->nombre = $request->nombre;
         $enfermedad->descripcion = $request->descripcion;
+        $enfermedad->especialidad_id = $request->especialidad_id;
         $enfermedad->save();
-        $enfermedad->sintomas()->sync($request->sintomas, false);
+        if (isset($request->sintomas)) {
+            $enfermedad->sintomas()->sync($request->sintomas, false);
+        }
         return redirect()->route('enfermedad.index')->with('alert-success','Enfermedad creada');
     }
 
@@ -78,8 +81,9 @@ class ControlerEnfermedad extends Controller
     public function edit($id)
     {
         $sintomas = Sintoma::all();
+        $especialidades = Especialidad::all();
         $enfermedad = Enfermedad::findOrFail($id);
-        return view('enfermedad.edit', compact('enfermedad'), ['sintomas' => $sintomas]);
+        return view('enfermedad.edit', compact('enfermedad'), ['sintomas' => $sintomas , 'especialidades' => $especialidades]);
     }
 
     /**
@@ -98,6 +102,7 @@ class ControlerEnfermedad extends Controller
         $enfermedad = Enfermedad::findOrFail($id);
         $enfermedad->nombre = $request->nombre;
         $enfermedad->descripcion = $request->descripcion;
+        $enfermedad->especialidad_id = $request->especialidad_id;
         $enfermedad->save();
         if(isset($request->sintomas)){
             $enfermedad->sintomas()->sync($request->sintomas, true);

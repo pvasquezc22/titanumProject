@@ -6,29 +6,21 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	<i class="fa fa-edit"></i> Editar Especialidad
+                	<i class="fa fa-edit"></i> Editar Departamento
                 </div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{route('especialidad.update',$especialidad->id)}}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{route('turnos.update',$turno->id)}}">
                         <input name="_method" type="hidden" value="PATCH">
 						{{ csrf_field() }}
 
-						<div class="form-group{{ ($errors->has('nombre')) ? $errors->first('nombre') : '' }}">
-                            <label for="nombre" class="col-md-4 control-label">Nombre</label>
+						<div class="form-group{{ ($errors->has('turno_name')) ? $errors->first('turno_name') : '' }}">
+                            <label for="turno_name" class="col-md-4 control-label">Nombre</label>
                             <div class="col-md-6">
-    							<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingresa el nombre aqui" value="{{$especialidad->nombre}}" autofocus>
-    							{!! $errors->first('nombre','<p class="help-block">:message</p>') !!}
+    							<input type="text" id="turno_name" name="turno_name" class="form-control" placeholder="Ingresa el nombre aqui" value="{{$turno->nombre}}" autofocus>
+    							{!! $errors->first('turno_name','<p class="help-block">:message</p>') !!}
                             </div>
 						</div>
-
-                        <div class="form-group{{ ($errors->has('descripcion')) ? $errors->first('descripcion') : '' }}">
-                            <label for="descripcion" class="col-md-4 control-label">Descripcion</label>
-                            <div class="col-md-6">
-                                <textarea type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Ingresa la breviatura aqui">{{$especialidad->descripcion}}</textarea>
-                                {!! $errors->first('descripcion','<p class="help-block">:message</p>') !!}
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-3">
@@ -36,6 +28,7 @@
                                     <button type="submit" class="btn btn-block btn-warning">
                                         Editar
                                     </button>
+
                                 </div>
                                 <div class="col-md-6" align="right">
                                     <a class="btn btn-default btn-block" href="{{url()->previous()}}">

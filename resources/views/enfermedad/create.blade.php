@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
                 	<i class="fa fa-plus-circle"></i> Crear Enfermedad
@@ -31,6 +31,24 @@
 								{!! $errors->first('descripcion','<p class="help-block">:message</p>') !!}
 							</div>
 						</div>
+
+                        <div class="form-group{{ $errors->has('especialidad_id') ? ' has-error' : '' }}">
+                            <label for="especialidad_id" class="col-md-4 control-label">Especialidad</label>
+                            <div class="col-md-6">
+                                <select id="especialidad_id" name="especialidad_id" class="form-control">
+                                    @foreach($especialidades as $especialidad)
+                                    <option value="{{$especialidad->id}}" {{ (old('especialidad_id') == $especialidad->id) ? 'selected':'' }} >
+                                    {{$especialidad->nombre}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('especialidad_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('especialidad_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group{{ ($errors->has('sintomas')) ? $errors->first('sintomas') : '' }}">
                             <label for="sintomas" class="col-md-4 control-label">Sintomas</label>

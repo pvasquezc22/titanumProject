@@ -42,7 +42,6 @@
                             <label for="departamento_id" class="col-md-4 control-label">Departamento</label>
                             <div class="col-md-6">
                                 <select id="departamento_id" name="departamento_id" class="form-control">
-                                    <option value="0" >Selecciona un departamento</option>
                                     @foreach($departamentos as $departamento)
                                     <option value="{{$departamento->id}}" {{ (old('departamento_id') == $departamento->id) ? 'selected':'' }} >
                                     {{$departamento->name}}

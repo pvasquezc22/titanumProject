@@ -6,25 +6,17 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	<i class="fa fa-plus-circle"></i> Crear Departamento
+                	<i class="fa fa-plus-circle"></i> Crear Turno
                 </div>
                 <div class="panel-body">
-					<form class="form-horizontal" role="form" method="POST" action="{{route('departamento.store')}}">
+					<form class="form-horizontal" role="form" method="POST" action="{{route('turnos.store')}}">
 						{{ csrf_field() }}
 						
-						<div class="form-group{{ ($errors->has('departamento_name')) ? $errors->first('departamento_name') : '' }}">
-							<label for="departamento_name" class="col-md-4 control-label">Nombre</label>
+						<div class="form-group{{ ($errors->has('turno_name')) ? $errors->first('turno_name') : '' }}">
+							<label for="turno_name" class="col-md-4 control-label">Nombre</label>
 							<div class="col-md-6">
-								<input type="text" id="departamento_name" name="departamento_name" class="form-control" placeholder="Ingresa el nombre aqui" required autofocus>
-								{!! $errors->first('departamento_name','<p class="help-block">:message</p>') !!}
-							</div>
-						</div>
-
-						<div class="form-group{{ ($errors->has('abreviatura')) ? $errors->first('abreviatura') : '' }}">
-							<label for="abreviatura" class="col-md-4 control-label">Abreviatura</label>
-							<div class="col-md-6">
-								<input type="text" id="abreviatura" name="abreviatura" class="form-control" placeholder="Ingresa la abreviatura aqui" required>
-								{!! $errors->first('abreviatura','<p class="help-block">:message</p>') !!}
+								<input type="text" id="turno_name" name="turno_name" class="form-control" placeholder="Ingresa el nombre aqui" required autofocus>
+								{!! $errors->first('turno_name','<p class="help-block">:message</p>') !!}
 							</div>
 						</div>
 						

@@ -12,4 +12,10 @@ class Departamento extends Model
     {
     	return $this->hasMany('App\User');
     }
+
+    public function pacientes()
+    {
+    	return $this->hasMany('App\Paciente');
+    }
+
 }

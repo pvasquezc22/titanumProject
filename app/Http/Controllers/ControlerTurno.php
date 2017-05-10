@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Especialidad;
+use App\Turno;
 
-class ControlerEspecialidad extends Controller
+class ControlerTurno extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
@@ -18,8 +17,8 @@ class ControlerEspecialidad extends Controller
      */
     public function index()
     {
-        $especialidades = Especialidad::all();
-        return view('especialidad.index',['especialidades' => $especialidades]);
+        $turnos = Turno::all();
+        return view('turnos.index',['turnos' => $turnos]);
     }
 
 
@@ -31,7 +30,7 @@ class ControlerEspecialidad extends Controller
     public function create()
     {
         //create new data
-        return view('especialidad.create');
+        return view('turnos.create');
     }
 
     /**
@@ -42,14 +41,14 @@ class ControlerEspecialidad extends Controller
      */
     public function store(Request $request)
     {
+    	//dd($request);
         //validation of data
-        $this->validate($request,['nombre'=>'required','descripcion'=>'required']);
+        $this->validate($request,['turno_name'=>'required']);
         //create new data
-        $especialidad = new Especialidad;
-        $especialidad->nombre = $request->nombre;
-        $especialidad->descripcion = $request->descripcion;        
-        $especialidad->save();
-        return redirect()->route('especialidad.index')->with('alert-success','Especialidad creada');
+        $turno = new Turno;
+        $turno->nombre = $request->turno_name;
+        $turno->save();
+        return redirect()->route('turnos.index')->with('alert-success','Turno creado');
     }
 
     /**
@@ -71,9 +70,9 @@ class ControlerEspecialidad extends Controller
      */
     public function edit($id)
     {
-        $especialidad = Especialidad::findOrFail($id);
+        $turno = Turno::findOrFail($id);
         //return to view edit
-        return view('especialidad.edit',compact('especialidad'));
+        return view('turnos.edit',compact('turno'));
     }
 
     /**
@@ -86,13 +85,12 @@ class ControlerEspecialidad extends Controller
     public function update(Request $request, $id)
     {
         //validation of data
-        $this->validate($request,['nombre'=>'required','descripcion'=>'required']);
+        $this->validate($request,['turno_name'=>'required']);
         //edit updated data
-        $especialidad = Especialidad::findOrFail($id);
-        $especialidad->nombre = $request->nombre;
-        $especialidad->descripcion = $request->descripcion;
-        $especialidad->save();
-        return redirect()->route('especialidad.index')->with('alert-warning','Especialidad editada');
+        $turno = Turno::findOrFail($id);
+        $turno->nombre = $request->turno_name;
+        $turno->save();
+        return redirect()->route('turnos.index')->with('alert-warning','Turno editado');
     }
 
     /**
@@ -103,8 +101,8 @@ class ControlerEspecialidad extends Controller
      */
     public function destroy($id)
     {
-        $especialidad = Especialidad::findOrFail($id);
-        $especialidad->delete();
-        return redirect()->route('especialidad.index')->with('alert-warning','Especialidad eliminada');
+        $turno = Turno::findOrFail($id);
+        $turno->delete();
+        return redirect()->route('turnos.index')->with('alert-warning','Turno eliminado');
     }
 }

@@ -6,9 +6,9 @@
 	        <div class="col-md-10 col-md-offset-1">
 	            <div class="panel panel-default">
 	                <div class="panel-heading">
-	                	<i class="fa fa-users"></i> Usuarios
+	                	<i class="fa fa-address-book"></i> Pacientes
 	                	<div class="pull-right">
-							<a href="{{route('usuarios.create')}}" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-plus-circle"></i> Nuevo</a>
+							<a href="{{route('paciente.create')}}" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-plus-circle"></i> Nuevo</a>
 	                	</div>
 	                </div>
 
@@ -20,45 +20,31 @@
 									<th>Nombre</th>
 									<th>Carnet</th>
 									<th>Exp</th>
-									<th>Correo electronico</th>
-									<th>Tipo</th>
+									<th>Edad</th>
+									<th>Tel-Cel</th>
+									<th>Hist.</th>
 									<th>Editar</th>
 									<th>Eliminar</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php $num = 1; ?>
-								@foreach($users as $user)
+								@foreach($pacientes as $paciente)
 									<tr>
 										<td>{{$num++}}</td>
+										<td>{{$paciente->nombre_completo()}}</td>
+										<td>{{$paciente->carnet}}</td>
+										<td>{{$paciente->departamento->abreviatura}}</td>
+										<td>{{$paciente->edad()}}</td>
+										<td>{{$paciente->telefonos()}}</td>
 										<td>
-											{{$user->name}}
-											@if($user->especialidad)
-											<div class="especialidad">
-												<span class="label label-primary">{{$user->especialidad->nombre}}</span>
-											</div>
-											@endif
-										</td>
-										<td>{{$user->carnet}}</td>
-										<td>{{$user->departamento->abreviatura}}</td>
-										<td>{{$user->email}}</td>
-										<td>
-											{{$user->tipo_usuario}}
-											@if($user->turno)
-											<div class="turno">
-												<div class="turno">
-													<span class="label label-success">
-														{{$user->turno->nombre}}
-													</span>
-												</div>
-											</div>
-											@endif
+											<a href="{{route('paciente.show',$paciente->id)}}" class="btn btn-success"><i class="fa fa-file-text"></i></a>
 										</td>
 										<td>
-											<a href="{{route('usuarios.edit',$user->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+											<a href="{{route('paciente.edit',$paciente->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
 										</td>
 										<td>
-											<form class="" action="{{route('usuarios.destroy',$user->id)}}" method="post">
+											<form class="" action="{{route('paciente.destroy',$paciente->id)}}" method="post">
 												<input type="hidden" name="_method" value="delete">
 												<input type="hidden" name="_token" value="{{ csrf_token() }}">
 												<button type="submit" class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar este registro?');"><i class="fa fa-trash"></i></button>

@@ -22,7 +22,11 @@ Route::get('/home', 'HomeController@index');
 Route::group(['middleware' => ['web']], function () {
     Route::resource('departamento','ControladorDepartamento');
     Route::resource('usuarios','ControlerUser');
+    Route::resource('paciente','ControlerPaciente');
     Route::resource('especialidad','ControlerEspecialidad');
     Route::resource('sintoma','ControlerSintoma');
     Route::resource('enfermedad','ControlerEnfermedad');
+    Route::resource('turnos','ControlerTurno');
+    Route::resource('diagnostico','ControlerDiagnostico');
+    Route::resource('bayes','ControlerBayes');
 });

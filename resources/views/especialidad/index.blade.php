@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
                 	<i class="fa fa-star"></i> Especialidades
@@ -19,6 +19,7 @@
 								<th>No.</th>
 								<th>Nombre</th>
 								<th>Descripcion</th>
+								<th>Enfermedades</th>
 								<th>Editar</th>
 								<th>Eliminar</th>
 							</tr>
@@ -30,6 +31,13 @@
 									<td>{{$num++}}</td>
 									<td>{{$especialidad->nombre}}</td>
 									<td>{{$especialidad->descripcion}}</td>
+									<td>
+										<div class="enfermedad">
+											@foreach($especialidad->enfermedades as $enfermedad)
+												<span class="label label-default">{{$enfermedad->nombre}}</span>
+											@endforeach
+										</div>
+									</td>
 									<td>
 										<a href="{{route('especialidad.edit',$especialidad->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
 									</td>

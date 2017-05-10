@@ -3,14 +3,16 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
                 	<i class="fa fa-edit"></i> Editar Sintoma
                 </div>
 
                 <div class="panel-body">
+
                     <form class="form-horizontal" role="form" method="POST" action="{{route('sintoma.update',$sintoma->id)}}">
+                    
                         <input name="_method" type="hidden" value="PATCH">
 						{{ csrf_field() }}
 
@@ -44,6 +46,7 @@
                                 </div>
                             </div>
                         </div>
+                        
 					</form>
                 </div>
             </div>
